@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UpperCase.Model;
-using UpperCase.View;
 using UpperCase.ViewModel;
-using UpperCase.Observer;
 
 
 namespace UpperCase
@@ -16,17 +14,13 @@ namespace UpperCase
        
         static void Main(string[] args)
         {
-            ViewUpper view = new ViewUpper(new EventManager());
-            ViewModelUpper viewModel = new ViewModelUpper(new EventManager());
-
-            view.publisher.Subscribe(viewModel);
-            viewModel.publisher.Subscribe(view);
-
+            ModelUpper modelUpper = new ModelUpper();
+            ViewModelUpper viewModelUpper = new ViewModelUpper(modelUpper);
             while (true)
             {
-                view.Ask();
+                string input = Console.ReadLine();
+                Console.WriteLine(viewModelUpper.Update(input));
             }
-                
         }
 
     }

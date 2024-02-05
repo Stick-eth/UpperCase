@@ -8,6 +8,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UpperCase.Model;
+using UpperCase.ViewModel;
+
 
 namespace WpfApp1
 {
@@ -16,20 +19,19 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
+        ModelUpper model;
+        ViewModelUpper viewModel;
+
         public MainWindow()
         {
             InitializeComponent();
+            this.model = new ModelUpper();
+            this.viewModel = new ViewModelUpper(this.model);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void buton_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine($"djf{Input.Text}");
-
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
+            output.Text= this.viewModel.Update(enter.Text);
         }
     }
 }

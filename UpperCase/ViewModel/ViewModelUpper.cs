@@ -4,27 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UpperCase.Model;
-using UpperCase.View;
 using UpperCase.ViewModel;
-using UpperCase.Observer;
 
 namespace UpperCase.ViewModel
 {
 
-    class ViewModelUpper:ISubscriber
+    public class ViewModelUpper
     {
-        public EventManager publisher;
-        public ViewModelUpper(EventManager instance)
+        public ViewModelUpper(ModelUpper instance)
         {
-            this.publisher = instance;
+            this.Upper = instance;
         }
 
-
-        public ModelUpper Upper = new ModelUpper();
-        public void Update(string e)
+        public ModelUpper Upper;
+        public string Update(string e)
         {
             string result = Upper.UpperCase(e);
-            publisher.Notify(result);
+            return result;
         }
     }
 }
