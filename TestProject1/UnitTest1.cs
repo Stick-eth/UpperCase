@@ -1,24 +1,24 @@
 using System.Diagnostics;
 using UpperCase;
+using UpperCase.Model;
+using UpperCase.ViewModel;
 
-namespace TestProject1
+namespace TestProjectNameSpace
 {
     [TestClass]
-    public class UnitTest1
+    public class UnitTest
     {
         [TestMethod]
-        public void TestMethod1()
+        [DataRow("input", "INPUT")]
+        [DataRow("maison", "MAISON")]
+        [DataRow("Corse123", "CORSE123")]
+        [DataRow("%&ciel", "%&CIEL")]
+        [DataRow("!*port", "!*PORT")]
+        public void Tester(string x, string y)
         {
-            Debug.Write("test");
-            // Assert
-            Assert.AreEqual(8, 8);
-        }
-        [TestMethod]
-        public void TestMethod2()
-        {
-            Debug.Write("test2");
-            // Assert
-            Assert.AreEqual(8, 8);
+            ModelUpper modelUpper = new ModelUpper();
+            ViewModelUpper viewModelUpper = new ViewModelUpper(modelUpper);
+            Assert.AreEqual(viewModelUpper.Update(x), y);
         }
     }
 }
